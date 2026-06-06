@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Toko Sembako Berkah - Toko kelontong terpercaya menyediakan beras, minyak goreng, gula, dan kebutuhan pokok sehari-hari dengan kualitas terbaik dan harga murah terjangkau.">
+  <meta name="keywords" content="sembako, toko sembako, beras premium, minyak goreng murah, toko kelontong berkah, belanja sembako online">
+  <meta name="author" content="Toko Sembako Berkah">
+  
+  <title>Toko Sembako Berkah - Kebutuhan Pokok Segar & Berkualitas</title>
+  
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==========================================
+       HEADER & NAVIGATION
+       ========================================== -->
+  <header id="header">
+    <div class="container">
+      <a href="#" class="logo" id="header-logo">
+        <i class="fa-solid fa-basket-shopping"></i> Sembako<span>Berkah</span>
+      </a>
+      
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#keunggulan" class="nav-link">Keunggulan</a>
+        <a href="#katalog" class="nav-link">Katalog Produk</a>
+        <a href="#tentang" class="nav-link">Tentang Kami</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#kontak" class="nav-link">Hubungi Kami</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="cart-toggle-btn" id="cart-toggle" aria-label="Lihat Keranjang">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-count-badge" id="cart-count">0</span>
+        </button>
+        <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Menu Utama">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       HERO SECTION
+       ========================================== -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-wrapper">
+        <div class="hero-content">
+          <div class="hero-tag">
+            <i class="fa-solid fa-seedling"></i> 100% Produk Asli & Berkualitas
+          </div>
+          <h1 class="hero-title">
+            Kebutuhan Pokok Keluarga Anda, <span>Tersedia Lengkap</span> & Hemat!
+          </h1>
+          <p class="hero-desc">
+            Menyediakan beras premium, minyak goreng higienis, telur segar, dan berbagai kebutuhan dapur harian Anda dengan layanan ramah dan harga bersahabat.
+          </p>
+          <div class="hero-actions">
+            <a href="#katalog" class="btn btn-primary">
+              <i class="fa-solid fa-bag-shopping"></i> Belanja Sekarang
+            </a>
+            <a href="#tentang" class="btn btn-outline">
+              Pelajari Lebih Lanjut
+            </a>
+          </div>
+        </div>
+        
+        <div class="hero-image-wrapper">
+          <!-- Premium Scalable SVG Grocery Illustration -->
+          <svg class="hero-illustration" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background circles and shapes -->
+            <circle cx="250" cy="250" r="210" fill="#E8F5E9" />
+            <circle cx="390" cy="120" r="40" fill="#FFF8E1" />
+            <circle cx="90" cy="380" r="60" fill="#E8F5E9" opacity="0.6"/>
+            
+            <!-- Leaves decorations -->
+            <path d="M410 180C420 200 400 220 380 210C370 190 390 170 410 180Z" fill="#81C784" />
+            <path d="M80 160C70 140 90 120 110 130C120 150 100 170 80 160Z" fill="#81C784" />
+            
+            <!-- Shopping Bag (Main container) -->
+            <path d="M150 200L160 410C160 420 170 430 180 430H320C330 430 340 420 340 410L350 200H150Z" fill="#D7CCC8" />
+            <path d="M150 200H350V230H150V200Z" fill="#BCAAA4" />
+            
+            <!-- Handles -->
+            <path d="M210 200V160C210 137.9 227.9 120 250 120C272.1 120 290 137.9 290 160V200" stroke="#8D6E63" stroke-width="12" stroke-linecap="round" />
+            
+            <!-- Logo inside the bag -->
+            <circle cx="250" cy="310" r="45" fill="#4CAF50" />
+            <path d="M230 310L245 325L275 295" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+            
+            <!-- Floating grocery items behind/above the bag -->
+            <!-- Milk Bottle -->
+            <rect x="170" y="110" width="45" height="100" rx="8" fill="#FFF" stroke="#B0BEC5" stroke-width="4" />
+            <rect x="180" y="140" width="25" height="40" rx="2" fill="#64B5F6" />
+            <rect x="180" y="95" width="25" height="15" rx="3" fill="#E0E0E0" />
+            
+            <!-- Carrot -->
+            <path d="M305 130C295 105 325 70 325 70C325 70 345 105 330 125C320 135 315 140 305 130Z" fill="#FF9800" />
+            <path d="M325 70C325 70 335 55 330 45C325 50 325 60 325 70Z" fill="#4CAF50" />
+            <path d="M328 68C328 68 343 58 342 48C335 52 332 60 328 68Z" fill="#4CAF50" />
+            
+            <!-- Bread / Grain Loaf -->
+            <rect x="230" y="90" width="50" height="110" rx="15" transform="rotate(15 230 90)" fill="#FFD54F" />
+            <line x1="250" y1="120" x2="270" y2="125" stroke="#FFB300" stroke-width="4" stroke-linecap="round" />
+            <line x1="245" y1="140" x2="265" y2="145" stroke="#FFB300" stroke-width="4" stroke-linecap="round" />
+            <line x1="240" y1="160" x2="260" y2="165" stroke="#FFB300" stroke-width="4" stroke-linecap="round" />
+            
+            <!-- Floating Sparkles -->
+            <path d="M120 250L125 255L120 260L115 255L120 250Z" fill="#FFD54F" />
+            <path d="M370 280L375 285L370 290L365 285L370 280Z" fill="#FFD54F" />
+            <path d="M250 50L253 53L250 56L247 53L250 50Z" fill="#FFD54F" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       BENEFITS / KEUNGGULAN SECTION
+       ========================================== -->
+  <section class="section-padding" id="keunggulan">
+    <div class="container">
+      <div class="text-center">
+        <span class="badge">Kenapa Memilih Kami?</span>
+        <h2 class="section-title">Layanan Terbaik Untuk Anda</h2>
+        <p class="section-subtitle">Toko Sembako Berkah mengutamakan kepuasan pelanggan dengan menghadirkan layanan belanja kebutuhan pokok yang mudah, cepat, dan terpercaya.</p>
+      </div>
+      
+      <div class="benefits-grid">
+        <!-- Benefit 1 -->
+        <div class="benefit-card">
+          <div class="benefit-icon-wrapper">
+            <i class="fa-solid fa-award"></i>
+          </div>
+          <h3>Produk Kualitas Premium</h3>
+          <p>Beras pilihan dari petani lokal, minyak higienis, dan telur yang selalu disortir segar setiap hari untuk menjamin nutrisi keluarga Anda.</p>
+        </div>
+        
+        <!-- Benefit 2 -->
+        <div class="benefit-card">
+          <div class="benefit-icon-wrapper">
+            <i class="fa-solid fa-tags"></i>
+          </div>
+          <h3>Harga Jujur & Hemat</h3>
+          <p>Kami menawarkan harga bersaing dan transparan tanpa ada biaya tersembunyi. Belanja bulanan jadi jauh lebih hemat untuk kantong Anda.</p>
+        </div>
+        
+        <!-- Benefit 3 -->
+        <div class="benefit-card">
+          <div class="benefit-icon-wrapper">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+          <h3>Pesan Cepat via WhatsApp</h3>
+          <p>Cukup pilih produk di website ini, masukkan ke keranjang belanja, dan kirim pesanan. Kami akan langsung mengantarkan belanjaan ke rumah Anda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CATALOG / PRODUCT SECTION
+       ========================================== -->
+  <section class="section-padding catalog-section" id="katalog">
+    <div class="container">
+      <div class="text-center">
+        <span class="badge">Katalog Produk</span>
+        <h2 class="section-title">Belanja Sembako Pilihan</h2>
+        <p class="section-subtitle">Temukan berbagai produk berkualitas tinggi untuk mengisi kebutuhan dapur harian Anda dengan harga terjangkau.</p>
+      </div>
+      
+      <!-- Filter and Search Bar -->
+      <div class="filter-bar">
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="Cari beras, minyak goreng, gula, atau lainnya...">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        
+        <div class="category-filters" id="category-filters">
+          <button class="filter-btn active" data-category="all">Semua Produk</button>
+          <button class="filter-btn" data-category="beras">Beras</button>
+          <button class="filter-btn" data-category="minyak">Minyak & Mentega</button>
+          <button class="filter-btn" data-category="bumbu">Bumbu & Gula</button>
+          <button class="filter-btn" data-category="telur">Telur & Susu</button>
+          <button class="filter-btn" data-category="instan">Makanan Instan</button>
+        </div>
+      </div>
+      
+      <!-- Dynamic Products Grid -->
+      <div class="products-grid" id="products-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       ABOUT US SECTION
+       ========================================== -->
+  <section class="section-padding" id="tentang">
+    <div class="container">
+      <div class="about-wrapper">
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80" alt="Sayuran segar di Toko Sembako Berkah">
+          <div class="about-experience">
+            <span class="about-experience-num">10+</span>
+            <span class="about-experience-text">Tahun<br>Melayani</span>
+          </div>
+        </div>
+        
+        <div class="about-content">
+          <span class="badge">Tentang Toko Kami</span>
+          <h2 class="section-title">Melayani Kebutuhan Pokok Sejak 2015</h2>
+          <p class="hero-desc">
+            Toko Sembako Berkah bermula dari toko fisik sederhana di lingkungan perumahan. Komitmen kami dari dulu hingga sekarang tetap sama: menyediakan sembako berkualitas tinggi dengan harga jujur untuk membantu kesejahteraan keluarga sekitar.
+          </p>
+          <p class="hero-desc" style="margin-top: -20px;">
+            Kini, kami menghadirkan kemudahan belanja digital melalui pemesanan WhatsApp agar Anda dapat menghemat waktu berharga Anda bersama keluarga tanpa perlu mengantre di luar.
+          </p>
+          
+          <div class="about-bullets">
+            <div class="about-bullet">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Produk Selalu Segar</span>
+            </div>
+            <div class="about-bullet">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Timbangan Akurat</span>
+            </div>
+            <div class="about-bullet">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Pelayanan Cepat</span>
+            </div>
+            <div class="about-bullet">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Bisa Bayar di Rumah (COD)</span>
+            </div>
+          </div>
+          
+          <a href="#kontak" class="btn btn-primary">Kunjungi Toko Kami</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FAQ SECTION
+       ========================================== -->
+  <section class="section-padding faq-section" id="faq">
+    <div class="container">
+      <div class="text-center">
+        <span class="badge">Pertanyaan Populer</span>
+        <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
+        <p class="section-subtitle">Temukan informasi cepat tentang cara pemesanan, metode pengiriman, dan kebijakan toko kami.</p>
+      </div>
+      
+      <div class="faq-wrapper">
+        <!-- FAQ 1 -->
+        <div class="faq-item">
+          <div class="faq-header">
+            <h3>Bagaimana cara berbelanja di website ini?</h3>
+            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </div>
+          <div class="faq-content">
+            <p>Caranya sangat mudah! Anda tinggal mencari produk yang diinginkan di menu katalog, klik ikon '+' (Tambah ke keranjang), masukkan data nama dan alamat pengiriman di form keranjang, lalu klik 'Pesan Sekarang via WhatsApp'. Pesanan akan otomatis tersusun menjadi teks WhatsApp dan dikirim langsung ke admin kami.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <div class="faq-header">
+            <h3>Apakah bisa bayar di tempat (COD)?</h3>
+            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </div>
+          <div class="faq-content">
+            <p>Ya, tentu bisa! Kami melayani sistem pembayaran di tempat (Cash on Delivery) setelah barang belanjaan Anda sampai di rumah dan diperiksa kualitasnya oleh Anda.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <div class="faq-header">
+            <h3>Berapa biaya pengirimannya?</h3>
+            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </div>
+          <div class="faq-content">
+            <p>Untuk area radius 3km dari lokasi toko kami, biaya pengiriman adalah GRATIS dengan minimal belanja Rp 50.000. Untuk wilayah di luar radius tersebut, tarif pengiriman berkisar antara Rp 5.000 hingga Rp 15.000 saja.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <div class="faq-header">
+            <h3>Apakah produk yang dikirim dijamin kebersihannya?</h3>
+            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </div>
+          <div class="faq-content">
+            <p>Kebersihan produk adalah prioritas kami. Semua produk curah seperti telur, beras, dan bumbu dapur dikemas ulang secara higienis menggunakan kemasan food grade sebelum dikirimkan ke pelanggan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CONTACT SECTION
+       ========================================== -->
+  <section class="section-padding" id="kontak">
+    <div class="container">
+      <div class="text-center">
+        <span class="badge">Hubungi Kami</span>
+        <h2 class="section-title">Hubungi Toko Kami</h2>
+        <p class="section-subtitle">Ada pertanyaan, saran, atau ingin memesan langsung dalam jumlah grosir? Hubungi kontak kami di bawah ini.</p>
+      </div>
+      
+      <div class="contact-wrapper">
+        <!-- Contact Info Card -->
+        <div class="contact-info-card">
+          <div>
+            <h3 class="contact-info-title">Toko Sembako Berkah</h3>
+            <p class="contact-info-desc">Kami selalu siap melayani segala kebutuhan pokok harian keluarga Anda dengan senyuman hangat.</p>
+            
+            <div class="contact-info-list">
+              <div class="contact-info-item">
+                <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="contact-info-details">
+                  <h4>Alamat Toko</h4>
+                  <p>Jl. Raya Berkah No. 88, RT.02/RW.05, Kec. Kelapa Gading, Jakarta Utara, 14240</p>
+                </div>
+              </div>
+              
+              <div class="contact-info-item">
+                <div class="contact-info-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                <div class="contact-info-details">
+                  <h4>WhatsApp Admin</h4>
+                  <p>+62 812-3456-7890</p>
+                </div>
+              </div>
+              
+              <div class="contact-info-item">
+                <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
+                <div class="contact-info-details">
+                  <h4>Jam Operasional</h4>
+                  <p>Senin - Minggu: 07:00 - 21:00 WIB</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <div class="social-links">
+              <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Contact Form Card -->
+        <div class="contact-form-card">
+          <form class="contact-form" id="contact-form">
+            <div class="form-group">
+              <label for="contact-name">Nama Lengkap</label>
+              <input type="text" id="contact-name" placeholder="Contoh: Budi Santoso" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="contact-phone">Nomor WhatsApp</label>
+              <input type="tel" id="contact-phone" placeholder="Contoh: 08123456xxx" required>
+            </div>
+            
+            <div class="form-group form-group-full">
+              <label for="contact-subject">Subjek / Keperluan</label>
+              <input type="text" id="contact-subject" placeholder="Contoh: Tanya Stok Grosir Beras" required>
+            </div>
+            
+            <div class="form-group form-group-full">
+              <label for="contact-message">Pesan Anda</label>
+              <textarea id="contact-message" placeholder="Tuliskan detail pertanyaan atau pesanan khusus Anda di sini..." required></textarea>
+            </div>
+            
+            <div class="map-container">
+              <!-- Simulated map pin inside South Jakarta/Jakarta area for realism -->
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.9696956697855!2d106.9015943!3d-6.1347643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a1e2f75a7c0bd%3A0xe6719b4cfb0b0051!2sKelapa%20Gading!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            
+            <button type="submit" class="btn btn-primary form-group-full" style="margin-top: 15px;">
+              <i class="fa-solid fa-paper-plane"></i> Kirim Pesan via WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CART OVERLAY & SIDEBAR DRAWER
+       ========================================== -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h2><i class="fa-solid fa-basket-shopping"></i> Keranjang Belanja</h2>
+      <button class="cart-close-btn" id="cart-close" aria-label="Tutup Keranjang">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    
+    <!-- Cart Items Scroll Area -->
+    <div class="cart-items-container" id="cart-items-container">
+      <!-- Empty Cart State (Default) -->
+      <div class="cart-empty" id="cart-empty">
+        <i class="fa-solid fa-basket-shopping"></i>
+        <p>Keranjang belanja Anda kosong.</p>
+      </div>
+    </div>
+    
+    <!-- Cart Footer (Only visible if items exist) -->
+    <div class="cart-footer" id="cart-footer" style="display: none;">
+      <div class="cart-totals">
+        <div class="cart-total-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">Rp 0</span>
+        </div>
+        <div class="cart-total-row">
+          <span>Ongkos Kirim (Flat)</span>
+          <span id="cart-shipping">Rp 5.000</span>
+        </div>
+        <div class="cart-total-row grand-total">
+          <span>Total Bayar</span>
+          <span class="total-amount" id="cart-total-amount">Rp 0</span>
+        </div>
+      </div>
+      
+      <!-- Checkout Info Form -->
+      <div class="checkout-details-form">
+        <input type="text" id="checkout-name" class="checkout-input" placeholder="Nama Penerima" required>
+        <input type="text" id="checkout-address" class="checkout-input" placeholder="Alamat Pengiriman Lengkap" required>
+      </div>
+      
+      <button class="btn btn-accent checkout-btn" id="checkout-whatsapp-btn">
+        <i class="fa-brands fa-whatsapp"></i> Pesan Sekarang via WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Footer About -->
+        <div class="footer-col footer-about">
+          <a href="#" class="logo">
+            <i class="fa-solid fa-basket-shopping"></i> Sembako<span>Berkah</span>
+          </a>
+          <p style="margin-top: 16px;">
+            Pilihan terbaik untuk belanja sembako harian Anda yang segar, murah, dan dijamin berkah. Siap kirim langsung ke depan pintu rumah Anda.
+          </p>
+        </div>
+        
+        <!-- Footer Links -->
+        <div class="footer-col footer-links">
+          <h3>Menu Cepat</h3>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#keunggulan">Keunggulan</a></li>
+            <li><a href="#katalog">Katalog Produk</a></li>
+            <li><a href="#tentang">Tentang Kami</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        
+        <!-- Footer Hours -->
+        <div class="footer-col footer-hours">
+          <h3>Jam Buka</h3>
+          <ul>
+            <li><span>Senin - Jumat</span> <span>07:00 - 21:00</span></li>
+            <li><span>Sabtu</span> <span>07:00 - 21:00</span></li>
+            <li><span>Minggu / Libur</span> <span>07:00 - 20:00</span></li>
+          </ul>
+        </div>
+        
+        <!-- Footer Newsletter -->
+        <div class="footer-col footer-newsletter">
+          <h3>Newsletter</h3>
+          <p>Dapatkan info promo mingguan menarik dari Toko Sembako Berkah langsung ke email Anda.</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan newsletter kami!');">
+            <input type="email" placeholder="Alamat email Anda..." required>
+            <button type="submit" class="newsletter-btn" aria-label="Langganan"><i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p>&copy; 2026 Toko Sembako Berkah. Hak Cipta Dilindungi Undang-Undang.</p>
+        
+        <div class="footer-payment-icons" aria-label="Metode Pembayaran">
+          <i class="fa-solid fa-money-bill-wave" title="Tunai / COD"></i>
+          <i class="fa-solid fa-wallet" title="Dompet Digital"></i>
+          <i class="fa-solid fa-credit-card" title="Transfer Bank"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>
