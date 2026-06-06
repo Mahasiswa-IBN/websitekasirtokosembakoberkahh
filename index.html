@@ -3,14 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Toko Sembako Berkah - Toko kelontong terpercaya menyediakan beras, minyak goreng, gula, dan kebutuhan pokok sehari-hari dengan kualitas terbaik dan harga murah terjangkau.">
-  <meta name="keywords" content="sembako, toko sembako, beras premium, minyak goreng murah, toko kelontong berkah, belanja sembako online">
-  <meta name="author" content="Toko Sembako Berkah">
+  <meta name="description" content="Aplikasi Kasir / Point of Sale Toko Sembako Berkah. Sistem pencatatan transaksi, stok barang, laporan penjualan, dan keuntungan harian.">
+  <title>Kasir Sembako Berkah - Sistem Point of Sale</title>
   
-  <title>Toko Sembako Berkah - Kebutuhan Pokok Segar & Berkualitas</title>
+  <!-- Google Fonts: Outfit (Heading) & Plus Jakarta Sans (Body & Numbers) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- FontAwesome for Premium Icons -->
+  <!-- FontAwesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js for Sales Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="style.css">
@@ -18,499 +23,798 @@
 <body>
 
   <!-- ==========================================
-       HEADER & NAVIGATION
+       MAIN CONTAINER
        ========================================== -->
-  <header id="header">
-    <div class="container">
-      <a href="#" class="logo" id="header-logo">
-        <i class="fa-solid fa-basket-shopping"></i> Sembako<span>Berkah</span>
-      </a>
+  <div class="app-layout">
+    
+    <!-- ==========================================
+         SIDEBAR NAVIGATION
+         ========================================== -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-basket-shopping"></i>
+        </div>
+        <div class="brand-name">
+          <h2>Sembako<span>Berkah</span></h2>
+          <small>Sistem Kasir Toko</small>
+        </div>
+      </div>
       
-      <nav class="nav-menu" id="nav-menu">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#keunggulan" class="nav-link">Keunggulan</a>
-        <a href="#katalog" class="nav-link">Katalog Produk</a>
-        <a href="#tentang" class="nav-link">Tentang Kami</a>
-        <a href="#faq" class="nav-link">FAQ</a>
-        <a href="#kontak" class="nav-link">Hubungi Kami</a>
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="#dashboard" class="nav-item active" data-view="dashboard">
+              <i class="fa-solid fa-chart-pie"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="#kasir" class="nav-item" data-view="kasir">
+              <i class="fa-solid fa-cash-register"></i>
+              <span>Terminal Kasir</span>
+            </a>
+          </li>
+          <li>
+            <a href="#produk" class="nav-item" data-view="produk">
+              <i class="fa-solid fa-boxes-stacked"></i>
+              <span>Kelola Produk</span>
+            </a>
+          </li>
+          <li>
+            <a href="#transaksi" class="nav-item" data-view="transaksi">
+              <i class="fa-solid fa-history"></i>
+              <span>Riwayat Transaksi</span>
+            </a>
+          </li>
+          <li>
+            <a href="#pengaturan" class="nav-item" data-view="pengaturan">
+              <i class="fa-solid fa-sliders"></i>
+              <span>Pengaturan & Backup</span>
+            </a>
+          </li>
+        </ul>
       </nav>
       
-      <div class="nav-actions">
-        <button class="cart-toggle-btn" id="cart-toggle" aria-label="Lihat Keranjang">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="cart-count-badge" id="cart-count">0</span>
-        </button>
-        <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Menu Utama">
-          <i class="fa-solid fa-bars-staggered"></i>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- ==========================================
-       HERO SECTION
-       ========================================== -->
-  <section class="hero" id="home">
-    <div class="container">
-      <div class="hero-wrapper">
-        <div class="hero-content">
-          <div class="hero-tag">
-            <i class="fa-solid fa-seedling"></i> 100% Produk Asli & Berkualitas
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar">
+            <i class="fa-solid fa-user-tie"></i>
           </div>
-          <h1 class="hero-title">
-            Kebutuhan Pokok Keluarga Anda, <span>Tersedia Lengkap</span> & Hemat!
-          </h1>
-          <p class="hero-desc">
-            Menyediakan beras premium, minyak goreng higienis, telur segar, dan berbagai kebutuhan dapur harian Anda dengan layanan ramah dan harga bersahabat.
-          </p>
-          <div class="hero-actions">
-            <a href="#katalog" class="btn btn-primary">
-              <i class="fa-solid fa-bag-shopping"></i> Belanja Sekarang
-            </a>
-            <a href="#tentang" class="btn btn-outline">
-              Pelajari Lebih Lanjut
-            </a>
+          <div class="user-info">
+            <span class="user-name">Kasir Aktif</span>
+            <span class="user-role" id="sidebar-cashier-name">Admin Berkah</span>
           </div>
         </div>
-        
-        <div class="hero-image-wrapper">
-          <!-- Premium Scalable SVG Grocery Illustration -->
-          <svg class="hero-illustration" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Background circles and shapes -->
-            <circle cx="250" cy="250" r="210" fill="#E8F5E9" />
-            <circle cx="390" cy="120" r="40" fill="#FFF8E1" />
-            <circle cx="90" cy="380" r="60" fill="#E8F5E9" opacity="0.6"/>
-            
-            <!-- Leaves decorations -->
-            <path d="M410 180C420 200 400 220 380 210C370 190 390 170 410 180Z" fill="#81C784" />
-            <path d="M80 160C70 140 90 120 110 130C120 150 100 170 80 160Z" fill="#81C784" />
-            
-            <!-- Shopping Bag (Main container) -->
-            <path d="M150 200L160 410C160 420 170 430 180 430H320C330 430 340 420 340 410L350 200H150Z" fill="#D7CCC8" />
-            <path d="M150 200H350V230H150V200Z" fill="#BCAAA4" />
-            
-            <!-- Handles -->
-            <path d="M210 200V160C210 137.9 227.9 120 250 120C272.1 120 290 137.9 290 160V200" stroke="#8D6E63" stroke-width="12" stroke-linecap="round" />
-            
-            <!-- Logo inside the bag -->
-            <circle cx="250" cy="310" r="45" fill="#4CAF50" />
-            <path d="M230 310L245 325L275 295" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-            
-            <!-- Floating grocery items behind/above the bag -->
-            <!-- Milk Bottle -->
-            <rect x="170" y="110" width="45" height="100" rx="8" fill="#FFF" stroke="#B0BEC5" stroke-width="4" />
-            <rect x="180" y="140" width="25" height="40" rx="2" fill="#64B5F6" />
-            <rect x="180" y="95" width="25" height="15" rx="3" fill="#E0E0E0" />
-            
-            <!-- Carrot -->
-            <path d="M305 130C295 105 325 70 325 70C325 70 345 105 330 125C320 135 315 140 305 130Z" fill="#FF9800" />
-            <path d="M325 70C325 70 335 55 330 45C325 50 325 60 325 70Z" fill="#4CAF50" />
-            <path d="M328 68C328 68 343 58 342 48C335 52 332 60 328 68Z" fill="#4CAF50" />
-            
-            <!-- Bread / Grain Loaf -->
-            <rect x="230" y="90" width="50" height="110" rx="15" transform="rotate(15 230 90)" fill="#FFD54F" />
-            <line x1="250" y1="120" x2="270" y2="125" stroke="#FFB300" stroke-width="4" stroke-linecap="round" />
-            <line x1="245" y1="140" x2="265" y2="145" stroke="#FFB300" stroke-width="4" stroke-linecap="round" />
-            <line x1="240" y1="160" x2="260" y2="165" stroke="#FFB300" stroke-width="4" stroke-linecap="round" />
-            
-            <!-- Floating Sparkles -->
-            <path d="M120 250L125 255L120 260L115 255L120 250Z" fill="#FFD54F" />
-            <path d="M370 280L375 285L370 290L365 285L370 280Z" fill="#FFD54F" />
-            <path d="M250 50L253 53L250 56L247 53L250 50Z" fill="#FFD54F" />
-          </svg>
+        <div class="live-clock">
+          <i class="fa-regular fa-clock"></i>
+          <span id="current-time">00:00:00 WIB</span>
         </div>
       </div>
-    </div>
-  </section>
+    </aside>
 
-  <!-- ==========================================
-       BENEFITS / KEUNGGULAN SECTION
-       ========================================== -->
-  <section class="section-padding" id="keunggulan">
-    <div class="container">
-      <div class="text-center">
-        <span class="badge">Kenapa Memilih Kami?</span>
-        <h2 class="section-title">Layanan Terbaik Untuk Anda</h2>
-        <p class="section-subtitle">Toko Sembako Berkah mengutamakan kepuasan pelanggan dengan menghadirkan layanan belanja kebutuhan pokok yang mudah, cepat, dan terpercaya.</p>
-      </div>
+    <!-- ==========================================
+         MAIN CONTENT AREA
+         ========================================== -->
+    <main class="main-content">
       
-      <div class="benefits-grid">
-        <!-- Benefit 1 -->
-        <div class="benefit-card">
-          <div class="benefit-icon-wrapper">
-            <i class="fa-solid fa-award"></i>
-          </div>
-          <h3>Produk Kualitas Premium</h3>
-          <p>Beras pilihan dari petani lokal, minyak higienis, dan telur yang selalu disortir segar setiap hari untuk menjamin nutrisi keluarga Anda.</p>
+      <!-- HEADER STATUS BAR -->
+      <header class="content-header">
+        <div class="header-title-wrapper">
+          <h1 id="page-title">Dashboard</h1>
+          <p id="page-subtitle" class="text-muted">Ringkasan aktivitas toko dan performa penjualan hari ini.</p>
         </div>
-        
-        <!-- Benefit 2 -->
-        <div class="benefit-card">
-          <div class="benefit-icon-wrapper">
-            <i class="fa-solid fa-tags"></i>
-          </div>
-          <h3>Harga Jujur & Hemat</h3>
-          <p>Kami menawarkan harga bersaing dan transparan tanpa ada biaya tersembunyi. Belanja bulanan jadi jauh lebih hemat untuk kantong Anda.</p>
+        <div class="header-actions">
+          <button class="btn btn-primary" id="quick-pos-btn">
+            <i class="fa-solid fa-cash-register"></i> Transaksi Baru
+          </button>
         </div>
-        
-        <!-- Benefit 3 -->
-        <div class="benefit-card">
-          <div class="benefit-icon-wrapper">
-            <i class="fa-brands fa-whatsapp"></i>
-          </div>
-          <h3>Pesan Cepat via WhatsApp</h3>
-          <p>Cukup pilih produk di website ini, masukkan ke keranjang belanja, dan kirim pesanan. Kami akan langsung mengantarkan belanjaan ke rumah Anda.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      </header>
 
-  <!-- ==========================================
-       CATALOG / PRODUCT SECTION
-       ========================================== -->
-  <section class="section-padding catalog-section" id="katalog">
-    <div class="container">
-      <div class="text-center">
-        <span class="badge">Katalog Produk</span>
-        <h2 class="section-title">Belanja Sembako Pilihan</h2>
-        <p class="section-subtitle">Temukan berbagai produk berkualitas tinggi untuk mengisi kebutuhan dapur harian Anda dengan harga terjangkau.</p>
-      </div>
-      
-      <!-- Filter and Search Bar -->
-      <div class="filter-bar">
-        <div class="search-box">
-          <input type="text" id="search-input" placeholder="Cari beras, minyak goreng, gula, atau lainnya...">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-        
-        <div class="category-filters" id="category-filters">
-          <button class="filter-btn active" data-category="all">Semua Produk</button>
-          <button class="filter-btn" data-category="beras">Beras</button>
-          <button class="filter-btn" data-category="minyak">Minyak & Mentega</button>
-          <button class="filter-btn" data-category="bumbu">Bumbu & Gula</button>
-          <button class="filter-btn" data-category="telur">Telur & Susu</button>
-          <button class="filter-btn" data-category="instan">Makanan Instan</button>
-        </div>
-      </div>
-      
-      <!-- Dynamic Products Grid -->
-      <div class="products-grid" id="products-grid">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       ABOUT US SECTION
-       ========================================== -->
-  <section class="section-padding" id="tentang">
-    <div class="container">
-      <div class="about-wrapper">
-        <div class="about-image">
-          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80" alt="Sayuran segar di Toko Sembako Berkah">
-          <div class="about-experience">
-            <span class="about-experience-num">10+</span>
-            <span class="about-experience-text">Tahun<br>Melayani</span>
-          </div>
-        </div>
-        
-        <div class="about-content">
-          <span class="badge">Tentang Toko Kami</span>
-          <h2 class="section-title">Melayani Kebutuhan Pokok Sejak 2015</h2>
-          <p class="hero-desc">
-            Toko Sembako Berkah bermula dari toko fisik sederhana di lingkungan perumahan. Komitmen kami dari dulu hingga sekarang tetap sama: menyediakan sembako berkualitas tinggi dengan harga jujur untuk membantu kesejahteraan keluarga sekitar.
-          </p>
-          <p class="hero-desc" style="margin-top: -20px;">
-            Kini, kami menghadirkan kemudahan belanja digital melalui pemesanan WhatsApp agar Anda dapat menghemat waktu berharga Anda bersama keluarga tanpa perlu mengantre di luar.
-          </p>
-          
-          <div class="about-bullets">
-            <div class="about-bullet">
-              <i class="fa-solid fa-circle-check"></i>
-              <span>Produk Selalu Segar</span>
+      <!-- ==========================================
+           VIEW PANEL: DASHBOARD
+           ========================================== -->
+      <section id="view-dashboard" class="view-panel active">
+        <!-- Stat Cards Grid -->
+        <div class="stats-grid">
+          <!-- Card 1: Revenue -->
+          <div class="stat-card">
+            <div class="stat-icon-wrapper color-primary">
+              <i class="fa-solid fa-money-bill-trend-up"></i>
             </div>
-            <div class="about-bullet">
-              <i class="fa-solid fa-circle-check"></i>
-              <span>Timbangan Akurat</span>
-            </div>
-            <div class="about-bullet">
-              <i class="fa-solid fa-circle-check"></i>
-              <span>Pelayanan Cepat</span>
-            </div>
-            <div class="about-bullet">
-              <i class="fa-solid fa-circle-check"></i>
-              <span>Bisa Bayar di Rumah (COD)</span>
+            <div class="stat-details">
+              <span class="stat-title text-muted">Pendapatan Hari Ini</span>
+              <h3 class="stat-value" id="stat-revenue">Rp 0</h3>
+              <span class="stat-indicator text-success" id="stat-revenue-diff">
+                <i class="fa-solid fa-caret-up"></i> Terkini
+              </span>
             </div>
           </div>
           
-          <a href="#kontak" class="btn btn-primary">Kunjungi Toko Kami</a>
-        </div>
-      </div>
-    </div>
-  </section>
+          <!-- Card 2: Profit -->
+          <div class="stat-card">
+            <div class="stat-icon-wrapper color-accent">
+              <i class="fa-solid fa-coins"></i>
+            </div>
+            <div class="stat-details">
+              <span class="stat-title text-muted">Keuntungan Bersih</span>
+              <h3 class="stat-value" id="stat-profit">Rp 0</h3>
+              <span class="stat-indicator text-success" id="stat-profit-diff">
+                <i class="fa-solid fa-caret-up"></i> Terkini
+              </span>
+            </div>
+          </div>
 
-  <!-- ==========================================
-       FAQ SECTION
-       ========================================== -->
-  <section class="section-padding faq-section" id="faq">
-    <div class="container">
-      <div class="text-center">
-        <span class="badge">Pertanyaan Populer</span>
-        <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
-        <p class="section-subtitle">Temukan informasi cepat tentang cara pemesanan, metode pengiriman, dan kebijakan toko kami.</p>
-      </div>
-      
-      <div class="faq-wrapper">
-        <!-- FAQ 1 -->
-        <div class="faq-item">
-          <div class="faq-header">
-            <h3>Bagaimana cara berbelanja di website ini?</h3>
-            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          <!-- Card 3: Transactions -->
+          <div class="stat-card">
+            <div class="stat-icon-wrapper color-blue">
+              <i class="fa-solid fa-receipt"></i>
+            </div>
+            <div class="stat-details">
+              <span class="stat-title text-muted">Transaksi Penjualan</span>
+              <h3 class="stat-value" id="stat-sales-count">0</h3>
+              <span class="stat-indicator text-muted" id="stat-sales-sub">Hari Ini</span>
+            </div>
           </div>
-          <div class="faq-content">
-            <p>Caranya sangat mudah! Anda tinggal mencari produk yang diinginkan di menu katalog, klik ikon '+' (Tambah ke keranjang), masukkan data nama dan alamat pengiriman di form keranjang, lalu klik 'Pesan Sekarang via WhatsApp'. Pesanan akan otomatis tersusun menjadi teks WhatsApp dan dikirim langsung ke admin kami.</p>
-          </div>
-        </div>
-        
-        <!-- FAQ 2 -->
-        <div class="faq-item">
-          <div class="faq-header">
-            <h3>Apakah bisa bayar di tempat (COD)?</h3>
-            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
-          </div>
-          <div class="faq-content">
-            <p>Ya, tentu bisa! Kami melayani sistem pembayaran di tempat (Cash on Delivery) setelah barang belanjaan Anda sampai di rumah dan diperiksa kualitasnya oleh Anda.</p>
-          </div>
-        </div>
-        
-        <!-- FAQ 3 -->
-        <div class="faq-item">
-          <div class="faq-header">
-            <h3>Berapa biaya pengirimannya?</h3>
-            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
-          </div>
-          <div class="faq-content">
-            <p>Untuk area radius 3km dari lokasi toko kami, biaya pengiriman adalah GRATIS dengan minimal belanja Rp 50.000. Untuk wilayah di luar radius tersebut, tarif pengiriman berkisar antara Rp 5.000 hingga Rp 15.000 saja.</p>
-          </div>
-        </div>
-        
-        <!-- FAQ 4 -->
-        <div class="faq-item">
-          <div class="faq-header">
-            <h3>Apakah produk yang dikirim dijamin kebersihannya?</h3>
-            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
-          </div>
-          <div class="faq-content">
-            <p>Kebersihan produk adalah prioritas kami. Semua produk curah seperti telur, beras, dan bumbu dapur dikemas ulang secara higienis menggunakan kemasan food grade sebelum dikirimkan ke pelanggan.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ==========================================
-       CONTACT SECTION
-       ========================================== -->
-  <section class="section-padding" id="kontak">
-    <div class="container">
-      <div class="text-center">
-        <span class="badge">Hubungi Kami</span>
-        <h2 class="section-title">Hubungi Toko Kami</h2>
-        <p class="section-subtitle">Ada pertanyaan, saran, atau ingin memesan langsung dalam jumlah grosir? Hubungi kontak kami di bawah ini.</p>
-      </div>
-      
-      <div class="contact-wrapper">
-        <!-- Contact Info Card -->
-        <div class="contact-info-card">
-          <div>
-            <h3 class="contact-info-title">Toko Sembako Berkah</h3>
-            <p class="contact-info-desc">Kami selalu siap melayani segala kebutuhan pokok harian keluarga Anda dengan senyuman hangat.</p>
+          <!-- Card 4: Low Stock -->
+          <div class="stat-card" id="stat-low-stock-card">
+            <div class="stat-icon-wrapper color-red">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="stat-details">
+              <span class="stat-title text-muted">Peringatan Stok Tipis</span>
+              <h3 class="stat-value" id="stat-low-stock-count">0</h3>
+              <span class="stat-indicator text-red" id="stat-low-stock-action">Perlu Order Ulang</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Charts & Lists Grid -->
+        <div class="dashboard-grid">
+          <!-- Sales Trend Chart Card -->
+          <div class="dashboard-card chart-card">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-chart-line text-primary"></i> Tren Penjualan 7 Hari Terakhir</h3>
+              <div class="card-actions">
+                <span class="badge badge-primary">Grafik Mingguan</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart-container" style="position: relative; height:320px; width:100%">
+                <canvas id="salesTrendChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity & Best Sellers -->
+          <div class="dashboard-column">
+            <!-- Best Selling Products -->
+            <div class="dashboard-card list-card">
+              <div class="card-header">
+                <h3><i class="fa-solid fa-fire text-accent"></i> 5 Produk Terlaris</h3>
+              </div>
+              <div class="card-body p-0">
+                <ul class="best-sellers-list" id="dashboard-best-sellers">
+                  <!-- JS Rendered -->
+                  <li class="empty-list-item">Belum ada data penjualan.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Low Stock Table Widget -->
+        <div class="dashboard-card list-card mt-24">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-boxes-stacked text-red"></i> Daftar Produk Hampir Habis (Stok &lt; Batas Minimum)</h3>
+            <span class="badge badge-red" id="low-stock-table-badge">0 Produk</span>
+          </div>
+          <div class="card-body p-0 table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Nama Produk</th>
+                  <th>Kategori</th>
+                  <th class="text-right">Sisa Stok</th>
+                  <th class="text-right">Batas Min</th>
+                  <th class="text-right">Harga Jual</th>
+                  <th>Satuan</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-low-stock-table">
+                <!-- JS Rendered -->
+                <tr>
+                  <td colspan="7" class="text-center text-muted">Semua stok produk aman dan tercukupi.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           VIEW PANEL: KASIR TERMINAL (POS)
+           ========================================== -->
+      <section id="view-kasir" class="view-panel">
+        <div class="pos-layout">
+          <!-- POS Left Panel: Catalog & Search -->
+          <div class="pos-catalog-panel">
+            <div class="pos-search-bar">
+              <div class="search-input-wrapper">
+                <i class="fa-solid fa-barcode"></i>
+                <input type="text" id="pos-search-input" placeholder="Cari produk berdasarkan nama, kode, atau scan barcode..." autofocus autocomplete="off">
+              </div>
+              <button class="btn btn-outline-icon" id="pos-clear-search-btn" title="Reset Pencarian">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
             
-            <div class="contact-info-list">
-              <div class="contact-info-item">
-                <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
-                <div class="contact-info-details">
-                  <h4>Alamat Toko</h4>
-                  <p>Jl. Raya Berkah No. 88, RT.02/RW.05, Kec. Kelapa Gading, Jakarta Utara, 14240</p>
+            <div class="pos-categories" id="pos-category-tabs">
+              <!-- JS Rendered Tabs -->
+              <button class="pos-tab active" data-category="all">Semua Sembako</button>
+            </div>
+            
+            <div class="pos-grid-container">
+              <div class="pos-products-grid" id="pos-products-grid">
+                <!-- JS Rendered Cards -->
+              </div>
+            </div>
+          </div>
+          
+          <!-- POS Right Panel: Cart & Payment -->
+          <div class="pos-cart-panel">
+            <div class="cart-card-header">
+              <h3><i class="fa-solid fa-basket-shopping text-primary"></i> Keranjang Transaksi</h3>
+              <button class="btn btn-text-danger btn-sm" id="pos-clear-cart-btn">
+                <i class="fa-solid fa-trash-can"></i> Kosongkan
+              </button>
+            </div>
+            
+            <!-- Cart Items Container -->
+            <div class="cart-items-wrapper" id="pos-cart-items">
+              <!-- Empty Cart State -->
+              <div class="cart-empty-state">
+                <i class="fa-solid fa-cash-register"></i>
+                <p>Keranjang kosong</p>
+                <small class="text-muted">Klik produk di sebelah kiri atau ketik pencarian untuk memulai transaksi.</small>
+              </div>
+            </div>
+            
+            <!-- Cart Calculator Footer -->
+            <div class="cart-calculator-footer">
+              <div class="calc-row">
+                <span class="text-muted">Subtotal</span>
+                <span class="calc-value" id="pos-subtotal">Rp 0</span>
+              </div>
+              
+              <div class="calc-row flex-align-center">
+                <span class="text-muted">Diskon Toko</span>
+                <div class="discount-inputs">
+                  <div class="input-addon-wrapper size-xs">
+                    <input type="number" id="pos-discount-pct" placeholder="0" min="0" max="100" class="calc-input">
+                    <span class="addon-text">%</span>
+                  </div>
+                  <span class="discount-separator">atau</span>
+                  <div class="input-addon-wrapper size-sm">
+                    <span class="addon-text">Rp</span>
+                    <input type="number" id="pos-discount-nom" placeholder="0" min="0" step="500" class="calc-input">
+                  </div>
                 </div>
               </div>
               
-              <div class="contact-info-item">
-                <div class="contact-info-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                <div class="contact-info-details">
-                  <h4>WhatsApp Admin</h4>
-                  <p>+62 812-3456-7890</p>
+              <div class="calc-row flex-align-center">
+                <span class="text-muted">Pajak (PPN)</span>
+                <div class="input-addon-wrapper size-xs">
+                  <input type="number" id="pos-tax-pct" value="11" min="0" max="100" class="calc-input">
+                  <span class="addon-text">%</span>
                 </div>
               </div>
               
-              <div class="contact-info-item">
-                <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
-                <div class="contact-info-details">
-                  <h4>Jam Operasional</h4>
-                  <p>Senin - Minggu: 07:00 - 21:00 WIB</p>
+              <div class="calc-divider"></div>
+              
+              <div class="calc-row grand-total-row">
+                <span>Total Belanja</span>
+                <span class="total-value" id="pos-grand-total">Rp 0</span>
+              </div>
+              
+              <div class="payment-selection-section">
+                <label class="section-label text-muted">Metode Pembayaran</label>
+                <div class="payment-methods-grid">
+                  <label class="payment-method-card active">
+                    <input type="radio" name="payment_method" value="Tunai" checked>
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    <span>Tunai / Cash</span>
+                  </label>
+                  <label class="payment-method-card">
+                    <input type="radio" name="payment_method" value="QRIS">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <span>QRIS Dinamis</span>
+                  </label>
+                  <label class="payment-method-card">
+                    <input type="radio" name="payment_method" value="Transfer">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <span>Transfer Bank</span>
+                  </label>
                 </div>
               </div>
-            </div>
-          </div>
-          
-          <div>
-            <div class="social-links">
-              <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-              <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-              <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+
+              <!-- Cash Input Row (Only displayed/active for Tunai) -->
+              <div id="tunai-payment-details" class="tunai-details-panel">
+                <div class="calc-row flex-align-center">
+                  <span class="text-muted font-bold">Uang Diterima (Cash)</span>
+                  <div class="input-addon-wrapper size-md">
+                    <span class="addon-text">Rp</span>
+                    <input type="number" id="pos-cash-received" placeholder="0" class="calc-input-large" min="0">
+                  </div>
+                </div>
+                
+                <!-- Quick Cash Helpers -->
+                <div class="quick-cash-grid">
+                  <button class="quick-cash-btn" data-val="pas">Uang Pas</button>
+                  <button class="quick-cash-btn" data-val="10000">10rb</button>
+                  <button class="quick-cash-btn" data-val="20000">20rb</button>
+                  <button class="quick-cash-btn" data-val="50000">50rb</button>
+                  <button class="quick-cash-btn" data-val="100000">100rb</button>
+                  <button class="quick-cash-btn" data-val="200000">200rb</button>
+                </div>
+
+                <div class="calc-row change-row mt-8">
+                  <span class="font-bold">Uang Kembalian</span>
+                  <span class="change-value text-success font-bold" id="pos-cash-change">Rp 0</span>
+                </div>
+              </div>
+
+              <!-- Submit Payment -->
+              <button class="btn btn-accent checkout-submit-btn" id="pos-submit-btn" disabled>
+                <i class="fa-solid fa-print"></i> Cetak Struk & Bayar
+              </button>
             </div>
           </div>
         </div>
-        
-        <!-- Contact Form Card -->
-        <div class="contact-form-card">
-          <form class="contact-form" id="contact-form">
-            <div class="form-group">
-              <label for="contact-name">Nama Lengkap</label>
-              <input type="text" id="contact-name" placeholder="Contoh: Budi Santoso" required>
+      </section>
+
+      <!-- ==========================================
+           VIEW PANEL: KELOLA PRODUK (INVENTORY)
+           ========================================== -->
+      <section id="view-produk" class="view-panel">
+        <div class="inventory-controls-bar">
+          <div class="search-filter-group">
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="inventory-search" placeholder="Cari nama produk atau kode/barcode...">
             </div>
             
-            <div class="form-group">
-              <label for="contact-phone">Nomor WhatsApp</label>
-              <input type="tel" id="contact-phone" placeholder="Contoh: 08123456xxx" required>
-            </div>
-            
-            <div class="form-group form-group-full">
-              <label for="contact-subject">Subjek / Keperluan</label>
-              <input type="text" id="contact-subject" placeholder="Contoh: Tanya Stok Grosir Beras" required>
-            </div>
-            
-            <div class="form-group form-group-full">
-              <label for="contact-message">Pesan Anda</label>
-              <textarea id="contact-message" placeholder="Tuliskan detail pertanyaan atau pesanan khusus Anda di sini..." required></textarea>
-            </div>
-            
-            <div class="map-container">
-              <!-- Simulated map pin inside South Jakarta/Jakarta area for realism -->
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.9696956697855!2d106.9015943!3d-6.1347643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a1e2f75a7c0bd%3A0xe6719b4cfb0b0051!2sKelapa%20Gading!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            
-            <button type="submit" class="btn btn-primary form-group-full" style="margin-top: 15px;">
-              <i class="fa-solid fa-paper-plane"></i> Kirim Pesan via WhatsApp
+            <select id="inventory-filter-category" class="filter-select">
+              <option value="all">Semua Kategori</option>
+              <!-- JS Rendered -->
+            </select>
+
+            <select id="inventory-filter-stock" class="filter-select">
+              <option value="all">Semua Kondisi Stok</option>
+              <option value="low">Stok Tipis (Butuh Order)</option>
+              <option value="out">Stok Habis (0)</option>
+              <option value="ok">Stok Normal</option>
+            </select>
+          </div>
+          
+          <div class="action-buttons">
+            <button class="btn btn-primary" id="inventory-add-btn">
+              <i class="fa-solid fa-plus"></i> Tambah Produk Baru
             </button>
-          </form>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
+
+        <!-- Products Table Card -->
+        <div class="dashboard-card mt-16">
+          <div class="card-body p-0 table-responsive">
+            <table class="table table-hover" id="inventory-table">
+              <thead>
+                <tr>
+                  <th>Kode/Barcode</th>
+                  <th>Nama Produk</th>
+                  <th>Kategori</th>
+                  <th>Satuan</th>
+                  <th class="text-right">Harga Modal</th>
+                  <th class="text-right">Harga Jual</th>
+                  <th class="text-right">Margin (%)</th>
+                  <th class="text-center">Stok</th>
+                  <th class="text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-table-body">
+                <!-- JS Rendered -->
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="table-pagination-footer" id="inventory-pagination">
+            <!-- Dynamic pagination controls -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           VIEW PANEL: RIWAYAT TRANSAKSI
+           ========================================== -->
+      <section id="view-transaksi" class="view-panel">
+        <div class="history-controls-bar">
+          <div class="search-filter-group">
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="history-search" placeholder="Cari ID transaksi...">
+            </div>
+            
+            <div class="date-range-picker">
+              <div class="date-input-group">
+                <span class="text-muted text-xs">Dari</span>
+                <input type="date" id="history-date-start" class="date-input">
+              </div>
+              <div class="date-input-group">
+                <span class="text-muted text-xs">Sampai</span>
+                <input type="date" id="history-date-end" class="date-input">
+              </div>
+            </div>
+
+            <select id="history-filter-payment" class="filter-select">
+              <option value="all">Semua Pembayaran</option>
+              <option value="Tunai">Tunai</option>
+              <option value="QRIS">QRIS</option>
+              <option value="Transfer">Transfer</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- History Table Card -->
+        <div class="dashboard-card mt-16">
+          <div class="card-body p-0 table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>ID Transaksi</th>
+                  <th>Tanggal & Waktu</th>
+                  <th class="text-center">Jumlah Item</th>
+                  <th class="text-right">Total Transaksi</th>
+                  <th class="text-right">Total Keuntungan</th>
+                  <th class="text-center">Pembayaran</th>
+                  <th class="text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-body">
+                <!-- JS Rendered -->
+              </tbody>
+            </table>
+          </div>
+          <div class="table-pagination-footer" id="history-pagination">
+            <!-- Dynamic pagination controls -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           VIEW PANEL: PENGATURAN & BACKUP
+           ========================================== -->
+      <section id="view-pengaturan" class="view-panel">
+        <div class="settings-grid">
+          <!-- Store Config Form -->
+          <div class="dashboard-card">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-shop text-primary"></i> Identitas & Konfigurasi Toko</h3>
+            </div>
+            <div class="card-body">
+              <form id="settings-form" class="settings-form">
+                <div class="form-group">
+                  <label for="set-shop-name">Nama Toko</label>
+                  <input type="text" id="set-shop-name" value="Toko Sembako Berkah" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="set-shop-address">Alamat Toko</label>
+                  <textarea id="set-shop-address" rows="3" required>Jl. Raya Berkah No. 88, RT.02/RW.05, Kelapa Gading, Jakarta Utara</textarea>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="set-shop-phone">No. Telepon / WhatsApp</label>
+                    <input type="text" id="set-shop-phone" value="0812-3456-7890" required>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="set-default-tax">Pajak Bawaan (PPN %)</label>
+                    <input type="number" id="set-default-tax" value="11" min="0" max="100">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="set-receipt-header">Catatan Header Struk</label>
+                  <input type="text" id="set-receipt-header" value="Terima Kasih Telah Belanja!">
+                </div>
+
+                <div class="form-group">
+                  <label for="set-receipt-footer">Catatan Footer Struk</label>
+                  <input type="text" id="set-receipt-footer" value="Barang yang sudah dibeli tidak dapat ditukar/dikembalikan.">
+                </div>
+
+                <div class="form-group">
+                  <label for="set-cashier-name">Nama Kasir default</label>
+                  <input type="text" id="set-cashier-name" value="Admin Berkah">
+                </div>
+                
+                <button type="submit" class="btn btn-primary mt-8">
+                  <i class="fa-solid fa-save"></i> Simpan Pengaturan
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Backup, Restore, and Utilities -->
+          <div class="dashboard-card">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-database text-accent"></i> Manajemen Database Lokal</h3>
+            </div>
+            <div class="card-body">
+              <div class="db-utility-card">
+                <h4>Ekspor Data (Backup)</h4>
+                <p class="text-muted text-sm">Download seluruh basis data produk, transaksi, dan preferensi toko Anda ke dalam satu file berkas JSON untuk disimpan sebagai arsip cadangan.</p>
+                <button class="btn btn-outline-icon-text mt-8" id="db-export-btn">
+                  <i class="fa-solid fa-download"></i> Unduh File Backup (.json)
+                </button>
+              </div>
+
+              <div class="db-utility-card mt-24">
+                <h4>Impor Data (Restore)</h4>
+                <p class="text-muted text-sm">Unggah file cadangan `.json` yang telah Anda ekspor sebelumnya untuk memulihkan seluruh data produk, riwayat penjualan, dan pengaturan toko.</p>
+                <div class="file-upload-wrapper mt-12">
+                  <button class="btn btn-outline-icon-text" id="db-import-trigger">
+                    <i class="fa-solid fa-upload"></i> Pilih File Backup
+                  </button>
+                  <input type="file" id="db-import-file" accept=".json" style="display: none;">
+                  <span id="import-file-name" class="text-muted text-sm ml-12">Belum ada file dipilih</span>
+                </div>
+              </div>
+
+              <div class="db-utility-card mt-24">
+                <h4>Simulasi & Reset Sistem</h4>
+                <p class="text-muted text-sm">Gunakan tombol berikut jika Anda ingin memuat data sembako simulasi untuk demo, atau ingin menghapus seluruh data local storage untuk memulai dari awal.</p>
+                <div class="flex-wrap-gap-12 mt-12">
+                  <button class="btn btn-outline" id="db-demo-btn">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Muat Data Demo Lengkap
+                  </button>
+                  <button class="btn btn-danger" id="db-reset-btn">
+                    <i class="fa-solid fa-trash-arrow-up"></i> Reset Seluruh Data
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
 
   <!-- ==========================================
-       CART OVERLAY & SIDEBAR DRAWER
+       MODAL: TAMBAH / UBAH PRODUK
        ========================================== -->
-  <div class="cart-overlay" id="cart-overlay"></div>
-  
-  <div class="cart-drawer" id="cart-drawer">
-    <div class="cart-header">
-      <h2><i class="fa-solid fa-basket-shopping"></i> Keranjang Belanja</h2>
-      <button class="cart-close-btn" id="cart-close" aria-label="Tutup Keranjang">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-    
-    <!-- Cart Items Scroll Area -->
-    <div class="cart-items-container" id="cart-items-container">
-      <!-- Empty Cart State (Default) -->
-      <div class="cart-empty" id="cart-empty">
-        <i class="fa-solid fa-basket-shopping"></i>
-        <p>Keranjang belanja Anda kosong.</p>
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="product-modal-title">Tambah Produk Baru</h3>
+        <button class="modal-close-btn" id="product-modal-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
-    </div>
-    
-    <!-- Cart Footer (Only visible if items exist) -->
-    <div class="cart-footer" id="cart-footer" style="display: none;">
-      <div class="cart-totals">
-        <div class="cart-total-row">
-          <span>Subtotal</span>
-          <span id="cart-subtotal">Rp 0</span>
+      <form id="product-form" class="modal-form">
+        <input type="hidden" id="prod-id">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prod-code">Kode Produk / Barcode <span class="text-red">*</span></label>
+            <div class="input-action-group">
+              <input type="text" id="prod-code" required placeholder="Contoh: BRG001 / Barcode">
+              <button type="button" class="btn btn-secondary" id="prod-gen-code-btn" title="Generate Kode Acak">
+                <i class="fa-solid fa-arrows-rotate"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="prod-category">Kategori <span class="text-red">*</span></label>
+            <select id="prod-category" required>
+              <option value="">Pilih Kategori</option>
+              <option value="Beras & Karbohidrat">Beras & Karbohidrat</option>
+              <option value="Minyak & Mentega">Minyak & Mentega</option>
+              <option value="Bumbu & Gula">Bumbu & Gula</option>
+              <option value="Telur & Susu">Telur & Susu</option>
+              <option value="Makanan Instan">Makanan Instan</option>
+              <option value="Minuman & Kopi">Minuman & Kopi</option>
+              <option value="Kebersihan & Sabun">Kebersihan & Sabun</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
+          </div>
         </div>
-        <div class="cart-total-row">
-          <span>Ongkos Kirim (Flat)</span>
-          <span id="cart-shipping">Rp 5.000</span>
+
+        <div class="form-group">
+          <label for="prod-name">Nama Lengkap Produk <span class="text-red">*</span></label>
+          <input type="text" id="prod-name" placeholder="Contoh: Beras Pandan Wangi Cianjur 5kg" required>
         </div>
-        <div class="cart-total-row grand-total">
-          <span>Total Bayar</span>
-          <span class="total-amount" id="cart-total-amount">Rp 0</span>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prod-unit">Satuan Barang <span class="text-red">*</span></label>
+            <select id="prod-unit" required>
+              <option value="Pcs">Pcs / Eceran</option>
+              <option value="Kg">Kg / Timbangan</option>
+              <option value="Liter">Liter</option>
+              <option value="Dus">Dus / Karton</option>
+              <option value="Pak">Pak / Pack</option>
+              <option value="Bungkus">Bungkus</option>
+              <option value="Karung">Karung</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="prod-icon">Ikon Representasi</label>
+            <select id="prod-icon">
+              <option value="fa-solid fa-wheat-awn">🌾 Beras / Gandum</option>
+              <option value="fa-solid fa-bottle-droplet">💧 Minyak / Cairan</option>
+              <option value="fa-solid fa-egg">🥚 Telur</option>
+              <option value="fa-solid fa-cubes-stacked">🍬 Gula / Kubus</option>
+              <option value="fa-solid fa-box">📦 Dus / Kemasan</option>
+              <option value="fa-solid fa-bowl-rice">🍜 Mie / Makanan</option>
+              <option value="fa-solid fa-glass-water">🥛 Susu / Minuman</option>
+              <option value="fa-solid fa-soap">🧼 Sabun / Kebersihan</option>
+              <option value="fa-solid fa-circle">⚪ Umum / Lainnya</option>
+            </select>
+          </div>
         </div>
-      </div>
-      
-      <!-- Checkout Info Form -->
-      <div class="checkout-details-form">
-        <input type="text" id="checkout-name" class="checkout-input" placeholder="Nama Penerima" required>
-        <input type="text" id="checkout-address" class="checkout-input" placeholder="Alamat Pengiriman Lengkap" required>
-      </div>
-      
-      <button class="btn btn-accent checkout-btn" id="checkout-whatsapp-btn">
-        <i class="fa-brands fa-whatsapp"></i> Pesan Sekarang via WhatsApp
-      </button>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prod-cost-price">Harga Modal (Beli) <span class="text-red">*</span></label>
+            <div class="input-addon-wrapper">
+              <span class="addon-text">Rp</span>
+              <input type="number" id="prod-cost-price" required placeholder="0" min="0">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="prod-selling-price">Harga Jual Toko <span class="text-red">*</span></label>
+            <div class="input-addon-wrapper">
+              <span class="addon-text">Rp</span>
+              <input type="number" id="prod-selling-price" required placeholder="0" min="0">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prod-stock">Stok Awal <span class="text-red">*</span></label>
+            <input type="number" id="prod-stock" required placeholder="0" min="0">
+          </div>
+
+          <div class="form-group">
+            <label for="prod-min-stock">Batas Minimum Stok <span class="text-red">*</span></label>
+            <input type="number" id="prod-min-stock" required value="10" min="0">
+          </div>
+        </div>
+
+        <div class="modal-actions-footer">
+          <button type="button" class="btn btn-outline" id="product-modal-cancel">Batal</button>
+          <button type="submit" class="btn btn-primary" id="product-form-submit-btn">Simpan Produk</button>
+        </div>
+      </form>
     </div>
   </div>
 
   <!-- ==========================================
-       FOOTER
+       MODAL: DETAIL STRUK BELANJA (PREVIEW & PRINT)
        ========================================== -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <!-- Footer About -->
-        <div class="footer-col footer-about">
-          <a href="#" class="logo">
-            <i class="fa-solid fa-basket-shopping"></i> Sembako<span>Berkah</span>
-          </a>
-          <p style="margin-top: 16px;">
-            Pilihan terbaik untuk belanja sembako harian Anda yang segar, murah, dan dijamin berkah. Siap kirim langsung ke depan pintu rumah Anda.
-          </p>
+  <div class="modal-overlay" id="receipt-modal">
+    <div class="modal-card width-receipt">
+      <div class="modal-header hide-on-print">
+        <h3>Preview Struk Transaksi</h3>
+        <button class="modal-close-btn" id="receipt-modal-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <!-- Real thermal layout for paper width 58mm/80mm -->
+      <div class="receipt-paper" id="receipt-print-area">
+        <!-- Header -->
+        <div class="receipt-header">
+          <h2 class="receipt-store-name" id="rec-shop-name">TOKO SEMBAKO BERKAH</h2>
+          <p class="receipt-store-address" id="rec-shop-address">Jl. Raya Berkah No. 88, RT.02/RW.05, Jakarta Utara</p>
+          <p class="receipt-store-phone" id="rec-shop-phone">Telp: 0812-3456-7890</p>
         </div>
         
-        <!-- Footer Links -->
-        <div class="footer-col footer-links">
-          <h3>Menu Cepat</h3>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#keunggulan">Keunggulan</a></li>
-            <li><a href="#katalog">Katalog Produk</a></li>
-            <li><a href="#tentang">Tentang Kami</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
+        <div class="receipt-divider"></div>
+        
+        <!-- Metadata -->
+        <div class="receipt-meta">
+          <div class="meta-row">
+            <span>ID: <b id="rec-trans-id">TRX-000000</b></span>
+            <span class="text-right" id="rec-date">06/06/2026 12:00</span>
+          </div>
+          <div class="meta-row">
+            <span>Kasir: <span id="rec-cashier">Admin Berkah</span></span>
+            <span class="text-right" id="rec-payment">Tunai</span>
+          </div>
         </div>
         
-        <!-- Footer Hours -->
-        <div class="footer-col footer-hours">
-          <h3>Jam Buka</h3>
-          <ul>
-            <li><span>Senin - Jumat</span> <span>07:00 - 21:00</span></li>
-            <li><span>Sabtu</span> <span>07:00 - 21:00</span></li>
-            <li><span>Minggu / Libur</span> <span>07:00 - 20:00</span></li>
-          </ul>
+        <div class="receipt-divider"></div>
+        
+        <!-- Items Table -->
+        <table class="receipt-table-items">
+          <thead>
+            <tr>
+              <th>Nama Barang</th>
+              <th class="text-center">Qty</th>
+              <th class="text-right">Harga</th>
+              <th class="text-right">Total</th>
+            </tr>
+          </thead>
+          <tbody id="rec-items-list">
+            <!-- JS Rendered rows -->
+          </tbody>
+        </table>
+        
+        <div class="receipt-divider"></div>
+        
+        <!-- Totals -->
+        <div class="receipt-totals">
+          <div class="totals-row">
+            <span>Subtotal</span>
+            <span id="rec-subtotal">Rp 0</span>
+          </div>
+          <div class="totals-row" id="rec-row-discount" style="display: none;">
+            <span>Diskon</span>
+            <span id="rec-discount">-Rp 0</span>
+          </div>
+          <div class="totals-row">
+            <span>Pajak (PPN)</span>
+            <span id="rec-tax">Rp 0</span>
+          </div>
+          <div class="receipt-divider"></div>
+          <div class="totals-row grand-total">
+            <span>TOTAL BELANJA</span>
+            <span id="rec-grand-total">Rp 0</span>
+          </div>
+          <div class="receipt-divider"></div>
+          
+          <div id="rec-cash-details">
+            <div class="totals-row">
+              <span>Bayar (Cash)</span>
+              <span id="rec-cash-received">Rp 0</span>
+            </div>
+            <div class="totals-row">
+              <span>Kembali</span>
+              <span id="rec-cash-change">Rp 0</span>
+            </div>
+          </div>
         </div>
         
-        <!-- Footer Newsletter -->
-        <div class="footer-col footer-newsletter">
-          <h3>Newsletter</h3>
-          <p>Dapatkan info promo mingguan menarik dari Toko Sembako Berkah langsung ke email Anda.</p>
-          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan newsletter kami!');">
-            <input type="email" placeholder="Alamat email Anda..." required>
-            <button type="submit" class="newsletter-btn" aria-label="Langganan"><i class="fa-solid fa-paper-plane"></i></button>
-          </form>
+        <div class="receipt-divider"></div>
+        
+        <!-- Footer -->
+        <div class="receipt-footer">
+          <p class="receipt-footer-msg" id="rec-header-msg">Terima Kasih Telah Belanja!</p>
+          <p class="receipt-footer-msg" id="rec-footer-msg">Barang yang sudah dibeli tidak dapat ditukar/dikembalikan.</p>
         </div>
       </div>
       
-      <!-- Footer Bottom -->
-      <div class="footer-bottom">
-        <p>&copy; 2026 Toko Sembako Berkah. Hak Cipta Dilindungi Undang-Undang.</p>
-        
-        <div class="footer-payment-icons" aria-label="Metode Pembayaran">
-          <i class="fa-solid fa-money-bill-wave" title="Tunai / COD"></i>
-          <i class="fa-solid fa-wallet" title="Dompet Digital"></i>
-          <i class="fa-solid fa-credit-card" title="Transfer Bank"></i>
-        </div>
+      <div class="modal-actions-footer hide-on-print">
+        <button class="btn btn-outline" id="receipt-modal-cancel">Tutup</button>
+        <button class="btn btn-primary" id="receipt-modal-print-btn">
+          <i class="fa-solid fa-print"></i> Cetak Struk Sekarang
+        </button>
       </div>
     </div>
-  </footer>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
 
   <!-- Core JavaScript File -->
   <script src="app.js"></script>
