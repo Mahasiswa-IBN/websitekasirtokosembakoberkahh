@@ -26,7 +26,9 @@ const DEFAULT_SETTINGS = {
   defaultTax: 11,
   receiptHeader: "Terima Kasih Telah Belanja!",
   receiptFooter: "Barang yang sudah dibeli tidak dapat ditukar/dikembalikan.",
-  cashierName: "Admin Berkah"
+  cashierName: "Admin Berkah",
+  username: "admin",
+  password: "admin"
 };
 
 // Generate initial dummy sales to look premium on first view
@@ -167,10 +169,81 @@ function saveSettings() {
 }
 
 // ==========================================================================
+// AUTHENTICATION MANAGEMENT
+// ==========================================================================
+function checkAuthentication() {
+  const isLoggedIn = sessionStorage.getItem("berkah_pos_logged_in") === "true";
+  const loginContainer = document.getElementById("login-container");
+  const appLayout = document.getElementById("app-layout");
+  
+  if (isLoggedIn) {
+    if (loginContainer) loginContainer.style.display = "none";
+    if (appLayout) appLayout.style.display = "grid";
+  } else {
+    if (loginContainer) loginContainer.style.display = "flex";
+    if (appLayout) appLayout.style.display = "none";
+  }
+}
+
+function handleLoginSubmit(e) {
+  e.preventDefault();
+  const usernameInput = document.getElementById("login-username").value.trim();
+  const passwordInput = document.getElementById("login-password").value.trim();
+  
+  const correctUsername = settings.username || "admin";
+  const correctPassword = settings.password || "admin";
+  
+  if (usernameInput === correctUsername && passwordInput === correctPassword) {
+    sessionStorage.setItem("berkah_pos_logged_in", "true");
+    showToast("Login berhasil! Selamat datang.");
+    
+    // Clear login inputs
+    document.getElementById("login-username").value = "";
+    document.getElementById("login-password").value = "";
+    
+    // Force view to switch to dashboard
+    switchView("dashboard");
+    
+    checkAuthentication();
+  } else {
+    showToast("Username atau Password salah!", "danger");
+  }
+}
+
+function handleLogout() {
+  if (confirm("Apakah Anda yakin ingin keluar dari sistem kasir?")) {
+    sessionStorage.removeItem("berkah_pos_logged_in");
+    showToast("Anda telah keluar dari sistem", "warning");
+    
+    // Reset view to dashboard
+    switchView("dashboard");
+    
+    checkAuthentication();
+  }
+}
+
+// ==========================================================================
 // INITIAL SETUP & ROUTING
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
   loadDatabase();
+  checkAuthentication();
+  
+  // Bind login form submit
+  const loginForm = document.getElementById("login-form");
+  if (loginForm) {
+    loginForm.addEventListener("submit", handleLoginSubmit);
+  }
+  
+  // Bind logout button click
+  const logoutBtn = document.getElementById("sidebar-logout-btn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      handleLogout();
+    });
+  }
+
   initializeClock();
   setupSidebarNavigation();
   initDashboard();
@@ -1640,6 +1713,7 @@ window.refundTransaction = function(saleId) {
 function initSettings() {
   setupSettingsForm();
   setupDatabaseUtilityTriggers();
+  setupPasswordToggles();
 }
 
 function loadSettingsFormValues() {
@@ -1650,6 +1724,8 @@ function loadSettingsFormValues() {
   document.getElementById("set-receipt-header").value = settings.receiptHeader;
   document.getElementById("set-receipt-footer").value = settings.receiptFooter;
   document.getElementById("set-cashier-name").value = settings.cashierName;
+  document.getElementById("set-login-username").value = settings.username || "admin";
+  document.getElementById("set-login-password").value = settings.password || "admin";
 }
 
 function setupSettingsForm() {
@@ -1663,6 +1739,8 @@ function setupSettingsForm() {
     settings.receiptHeader = document.getElementById("set-receipt-header").value.trim();
     settings.receiptFooter = document.getElementById("set-receipt-footer").value.trim();
     settings.cashierName = document.getElementById("set-cashier-name").value.trim();
+    settings.username = document.getElementById("set-login-username").value.trim();
+    settings.password = document.getElementById("set-login-password").value.trim();
     
     saveSettings();
     
@@ -1672,6 +1750,28 @@ function setupSettingsForm() {
     
     showToast("Preferensi pengaturan berhasil disimpan!");
   });
+}
+
+function setupPasswordToggles() {
+  const loginToggle = document.getElementById("login-toggle-password");
+  const loginPass = document.getElementById("login-password");
+  if (loginToggle && loginPass) {
+    loginToggle.addEventListener("click", () => {
+      const type = loginPass.getAttribute("type") === "password" ? "text" : "password";
+      loginPass.setAttribute("type", type);
+      loginToggle.querySelector("i").className = type === "password" ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+    });
+  }
+
+  const settingsToggle = document.getElementById("settings-toggle-password");
+  const settingsPass = document.getElementById("set-login-password");
+  if (settingsToggle && settingsPass) {
+    settingsToggle.addEventListener("click", () => {
+      const type = settingsPass.getAttribute("type") === "password" ? "text" : "password";
+      settingsPass.setAttribute("type", type);
+      settingsToggle.querySelector("i").className = type === "password" ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+    });
+  }
 }
 
 function setupDatabaseUtilityTriggers() {
